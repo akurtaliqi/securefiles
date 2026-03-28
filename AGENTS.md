@@ -1,5 +1,8 @@
 # AI Agent Guidelines for SecureFiles
 
+## Business Requirements
+See [BUSINESS_SPEC.md](BUSINESS_SPEC.md) for detailed business specifications and project objectives.
+
 ## Architecture Overview
 - **Framework**: Spring Boot 4.0.5 with Java 21
 - **Data Layer**: JPA entities with H2 in-memory database for development
@@ -41,6 +44,7 @@
 - **Controller Example**: `@RestController @RequestMapping("/api/files")` with standard CRUD mappings
 
 ## Key Files
+- `BUSINESS_SPEC.md`: Business requirements and project objectives
 - `pom.xml`: Dependency management and build config
 - `SecurefilesApplication.java`: Main entry point
 - `application.yml`: Configuration (replaces properties)
