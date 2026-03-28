@@ -3,6 +3,12 @@
 ## Business Requirements
 See [BUSINESS_SPEC.md](BUSINESS_SPEC.md) for detailed business specifications and project objectives.
 
+## Developer Profile
+- **Role**: Software Engineer
+- **Applying for**: Senior Fullstack Developer
+- **Experience**: 5 years of professional experience + 3 years of part-time professional experience during bachelor and master studies
+- **Focus**: Clean code oriented
+
 ## Architecture Overview
 - **Framework**: Spring Boot 4.0.5 with Java 21
 - **Data Layer**: JPA entities with H2 in-memory database for development
@@ -49,7 +55,7 @@ See [BUSINESS_SPEC.md](BUSINESS_SPEC.md) for detailed business specifications an
 - `SecurefilesApplication.java`: Main entry point
 - `application.yml`: Configuration (replaces properties)
 - `docker-compose.yml`: Multi-container setup
-- `.env`: Environment variables
+- `.env`: Environment variables (located in backend/)
 - `README.md`: Project documentation
 - `frontend/package.json`: Frontend dependencies
 - `frontend/vite.config.js`: Vite configuration
