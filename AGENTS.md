@@ -17,18 +17,18 @@
 
 ## Project Structure
 - `secure-file-service/` (project root)
-- `backend/` contains the Maven/Gradle project root
-- `frontend/` contains the Node.js/React frontend application
+- `backend/` contains the Maven project root
+- `frontend/` contains the React frontend application
 - Source code: `backend/src/main/java/com/praxedo/securefiles/`
 - Resources: `backend/src/main/resources/`
 - Tests: `backend/src/test/java/com/praxedo/securefiles/`
 - Frontend source: `frontend/src/`
 
 ## Development Workflows
-- **Build Backend**: `./mvnw.cmd clean compile` or `./gradlew build`
+- **Build Backend**: `./mvnw.cmd clean compile`
 - **Run Application**: `./mvnw.cmd spring-boot:run` or `docker-compose up`
-- **Run Tests**: `./mvnw.cmd test` or `./gradlew test`
-- **Package JAR**: `./mvnw.cmd package` or `./gradlew bootJar`
+- **Run Tests**: `./mvnw.cmd test`
+- **Package JAR**: `./mvnw.cmd package`
 - **H2 Console**: Access at `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:mem:testdb`)
 - **Frontend Dev**: `cd frontend && npm run dev`
 - **Docker Build**: `docker-compose build`
@@ -41,7 +41,7 @@
 - **Controller Example**: `@RestController @RequestMapping("/api/files")` with standard CRUD mappings
 
 ## Key Files
-- `pom.xml` or `build.gradle`: Dependency management and build config
+- `pom.xml`: Dependency management and build config
 - `SecurefilesApplication.java`: Main entry point
 - `application.yml`: Configuration (replaces properties)
 - `docker-compose.yml`: Multi-container setup
