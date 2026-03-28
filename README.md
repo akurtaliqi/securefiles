@@ -1,6 +1,6 @@
 # SecureFiles
 
-A secure file management application built with Spring Boot (backend) and Vue.js (frontend) using hexagonal architecture.
+A secure file management application built with Spring Boot (backend) and React (frontend) using hexagonal architecture.
 
 ## Architecture
 
@@ -38,5 +38,5 @@ docker-compose up --build
 
 ## Development
 - Backend: Spring Boot with JPA and H2/PostgreSQL
-- Frontend: Vue.js with Vite
+- Frontend: React with Vite
 - Database: H2 for development, PostgreSQL for production

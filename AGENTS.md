@@ -18,7 +18,7 @@
 ## Project Structure
 - `secure-file-service/` (project root)
 - `backend/` contains the Maven/Gradle project root
-- `frontend/` contains the Node.js/Vite frontend application
+- `frontend/` contains the Node.js/React frontend application
 - Source code: `backend/src/main/java/com/praxedo/securefiles/`
 - Resources: `backend/src/main/resources/`
 - Tests: `backend/src/test/java/com/praxedo/securefiles/`
