@@ -40,3 +40,8 @@ build/
 ### Environment Variables ###
 .env
 backend/.env
+
+postman
+.postman
+
+uploads
