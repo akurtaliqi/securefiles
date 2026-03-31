@@ -45,7 +45,7 @@ public class ClamAVClient implements AntivirusPort {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException("ClamAV scan failed");
+            throw new SecurityException("ClamAV scan failed");
         }
     }
 
@@ -90,7 +90,7 @@ public class ClamAVClient implements AntivirusPort {
 
     private boolean parseResponse(String response) {
         if (response == null || response.isEmpty()) {
-            throw new RuntimeException("Empty response from ClamAV");
+            throw new SecurityException("Empty response from ClamAV");
         }
 
         if (response.contains("FOUND")) {
@@ -101,6 +101,6 @@ public class ClamAVClient implements AntivirusPort {
             return true;
         }
 
-        throw new RuntimeException("Unexpected ClamAV response: " + response);
+        throw new SecurityException("Unexpected ClamAV response: " + response);
     }
 }

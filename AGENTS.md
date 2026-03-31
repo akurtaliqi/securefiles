@@ -38,7 +38,9 @@ See [BUSINESS_SPEC.md](BUSINESS_SPEC.md) for detailed business specifications an
 
 ## Coding Conventions
 - **Lombok Usage**: Prefer `@Data`, `@AllArgsConstructor`, `@NoArgsConstructor` for entities; `@RequiredArgsConstructor` for services
-- **DTO Usage**: Create separate DTO classes in `controller/dto/` package for request/response mapping; use Lombok `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor` for clean implementation; use MapStruct for entity-to-DTO conversion
+- **DTO Usage**: Create separate DTO classes in `controller/dto/` package for request/response mapping; 
+- **Lombok** `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor` for clean implementation; 
+- **MapStruct** for entity-to-DTO conversion
 - **Package Naming**: Follow `com.praxedo.securefiles.{domain,application,controller,infrastructure}`
 - **Configuration**: Minimal properties in `application.properties`; use profiles for environments
 - **Entity Example**: Use `@Entity @Table(name="files")` with `@Id @GeneratedValue(strategy=GenerationType.IDENTITY)`
@@ -140,6 +142,7 @@ UPLOADED → SCANNING → CLEAN | INFECTED
 * Always stream files (no full memory load)
 * Generate unique storage paths (UUID-based)
 * Do not trust original filenames
+
 ## 2. External Dependencies
 All external systems must be abstracted:
 * Storage → `FileStoragePort`
@@ -158,6 +161,7 @@ Implementations must be replaceable without impacting business logic.
 * RESTful endpoints only
 * Use simple and clear contracts
 * Implement endpoint documentation (e.g., Swagger/OpenAPI, Responses, DTOs)
+* Always check endpoint inputs for validity and handle errors gracefully
 
 Required endpoints:
 * `POST /files` → upload

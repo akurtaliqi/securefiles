@@ -28,7 +28,7 @@ public class UploadFileUseCase {
                 .toAbsolutePath()
                 .normalize()
                 .toString();
-        
+
         scanFile(file);
 
         FileMetaData fileMetaData = new FileMetaData();
@@ -54,12 +54,13 @@ public class UploadFileUseCase {
         try {
             boolean isFileSafe = antivirusPort.scan(file.getInputStream());
             if (!isFileSafe) {
-                throw new RuntimeException("File is infected and cannot be stored");
+                throw new SecurityException("File is infected and cannot be stored");
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to scan file", e);
         }
     }
 }
+
 
 

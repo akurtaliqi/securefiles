@@ -4,6 +4,7 @@ import com.praxedo.securefiles.application.UploadFileUseCase;
 import com.praxedo.securefiles.application.port.AntivirusPort;
 import com.praxedo.securefiles.application.port.FileStoragePort;
 import com.praxedo.securefiles.domain.FileMetaDataRepository;
+import com.praxedo.securefiles.exception.GlobalExceptionHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,8 +37,10 @@ class FileControllerTest {
     void setUp() {
         UploadFileUseCase uploadFileUseCase = new UploadFileUseCase(fileMetaDataRepository, fileStoragePort, antivirusPort);
         FileController fileController = new FileController(uploadFileUseCase);
-        mockMvc = MockMvcBuilders.standaloneSetup(fileController).build();
-        
+        mockMvc = MockMvcBuilders.standaloneSetup(fileController)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
+
         lenient().when(antivirusPort.scan(any())).thenReturn(true);
         lenient().when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
         lenient().when(fileMetaDataRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
@@ -87,5 +90,20 @@ class FileControllerTest {
         mockMvc.perform(multipart("/api/files").file(file))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.originalFilename").value("report.xlsx"));
+    }
+
+    @Test
+    void testUploadFile_ShouldRejectEmptyFile() throws Exception {
+        MockMultipartFile emptyFile = new MockMultipartFile("file", "empty.txt", "text/plain", new byte[0]);
+
+        mockMvc.perform(multipart("/api/files").file(emptyFile))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("A multipart file is required"));
+    }
+
+    @Test
+    void testUploadFile_ShouldRejectMissingFilePart() throws Exception {
+        mockMvc.perform(multipart("/api/files"))
+                .andExpect(status().isBadRequest());
     }
 }

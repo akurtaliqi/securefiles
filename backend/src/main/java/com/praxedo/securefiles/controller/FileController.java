@@ -16,6 +16,9 @@ public class FileController {
 
     @PostMapping
     public ResponseEntity<FileMetaData> uploadFile(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("A multipart file is required");
+        }
         FileMetaData fileMetaData = uploadFileUseCase.execute(file.getOriginalFilename(), file);
         return ResponseEntity.ok(fileMetaData);
     }
