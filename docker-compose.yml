@@ -1,0 +1,41 @@
+services:
+  clamav:
+    image: clamav/clamav:latest
+    container_name: clamav-server
+    ports:
+      - "3310:3310"
+    volumes:
+      - clamav_data:/var/lib/clamav
+    environment:
+      - CLAMAV_DB_DIR=/var/lib/clamav
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo PING | nc -w 2 127.0.0.1 3310 | grep -q PONG'"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+    networks:
+      - securefiles-network
+
+  backend:
+    build:
+      context: ./backend
+    container_name: securefiles-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - ANTIVIRUS_CLAMAV_HOST=clamav
+      - ANTIVIRUS_CLAMAV_PORT=3310
+    depends_on:
+      clamav:
+        condition: service_healthy
+    networks:
+      - securefiles-network
+
+volumes:
+  clamav_data:
+
+networks:
+  securefiles-network:
+    driver: bridge

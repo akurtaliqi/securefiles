@@ -44,6 +44,7 @@ See [BUSINESS_SPEC.md](BUSINESS_SPEC.md) for detailed business specifications an
 - **Entity Example**: Use `@Entity @Table(name="files")` with `@Id @GeneratedValue(strategy=GenerationType.IDENTITY)`
 - **Controller Example**: `@RestController @RequestMapping("/api/files")` with standard CRUD mappings
 - **Unused Code**: Never add unused code; ensure all code is actively used or remove it
+- **Language** : All code must be in English; no comments or identifiers in other languages
 
 ## Key Files
 - `BUSINESS_SPEC.md`: Business requirements and project objectives
@@ -156,6 +157,7 @@ Implementations must be replaceable without impacting business logic.
 ## 🌐 API Design
 * RESTful endpoints only
 * Use simple and clear contracts
+* Implement endpoint documentation (e.g., Swagger/OpenAPI, Responses, DTOs)
 
 Required endpoints:
 * `POST /files` → upload

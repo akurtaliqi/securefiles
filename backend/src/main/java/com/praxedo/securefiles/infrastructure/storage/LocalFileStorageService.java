@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 @Slf4j
 public class LocalFileStorageService implements FileStoragePort {
 
-    @Value("${file.storage.path:./uploads}")
+    @Value("${file.storage.path:./backend/uploads}")
     private String storageBasePath;
 
     private String absoluteStoragePath;
