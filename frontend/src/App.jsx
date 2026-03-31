@@ -1,16 +1,15 @@
-import { useState } from 'react'
+import FileDragger from './components/FileDragger'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <h1>SecureFiles</h1>
-        <p>Welcome to the Secure File Management Application</p>
+    <div className="page">
+      <div className="page__header">
+        <h1 className="page__title">Upload a file</h1>
+        <p className="page__subtitle">Files are scanned automatically before being available.</p>
       </div>
-    </>
+      <FileDragger />
+    </div>
   )
 }
 

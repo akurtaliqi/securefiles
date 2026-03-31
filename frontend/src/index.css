@@ -1,19 +1,22 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: 'Inter', sans-serif;
+  background-color: #F9FAFB;
+  color: #101828;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 24px;
+  min-height: 100vh;
 }

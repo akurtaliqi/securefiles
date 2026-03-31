@@ -238,3 +238,14 @@ AI-generated code must:
 * Never create more than requested
 * Prefer fewer classes over more abstractions
 * If a class is not used, do not create it
+
+# Frontend Development Guidelines
+* Keep files around 150 lines of code to improve readability and scalability
+* Use the COmpount Component pattern for better separation of concerns and maintainability
+* Rename components to reflect their purpose and avoid confusion (e.g., `FileUpload` instead of `FileUploadComponent`)
+* Use clear and descriptive names for components, props, and functions to enhance readability
+* Avoid unnecessary abstraction and complexity; prefer straightforward implementations that are easy to understand and maintain
+* Do not implement features that are not explicitly required (e.g., authentication, state management libraries, complex UI patterns) to keep the codebase simple and focused on the core functionality
+* Ensure that all code is actively used in the application; do not create components, functions, or files that are not immediately necessary for the current requirements
+* Use Redux or Context API only if state management becomes complex; otherwise, manage state locally within components to keep things simple
+* 
