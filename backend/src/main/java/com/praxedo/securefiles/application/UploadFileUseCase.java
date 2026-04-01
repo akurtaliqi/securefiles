@@ -34,7 +34,7 @@ public class UploadFileUseCase {
         FileMetaData fileMetaData = new FileMetaData();
         fileMetaData.setOriginalFilename(originalFilename);
         fileMetaData.setStoragePath(storagePath);
-        fileMetaData.setStatus(FileStatus.UPLOADED);
+        fileMetaData.setStatus(FileStatus.CLEAN);
         fileMetaData.setFileSize(file.getSize());
         fileMetaData.setContentType(file.getContentType());
         fileMetaData.setUploadedAt(LocalDateTime.now());

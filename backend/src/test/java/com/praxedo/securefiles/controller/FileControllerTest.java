@@ -1,5 +1,7 @@
 package com.praxedo.securefiles.controller;
 
+import com.praxedo.securefiles.application.DownloadFileUseCase;
+import com.praxedo.securefiles.application.GetAllFilesUseCase;
 import com.praxedo.securefiles.application.UploadFileUseCase;
 import com.praxedo.securefiles.application.port.AntivirusPort;
 import com.praxedo.securefiles.application.port.FileStoragePort;
@@ -36,7 +38,9 @@ class FileControllerTest {
     @BeforeEach
     void setUp() {
         UploadFileUseCase uploadFileUseCase = new UploadFileUseCase(fileMetaDataRepository, fileStoragePort, antivirusPort);
-        FileController fileController = new FileController(uploadFileUseCase);
+        GetAllFilesUseCase getAllFilesUseCase = new GetAllFilesUseCase(fileMetaDataRepository, fileStoragePort);
+        DownloadFileUseCase downloadFileUseCase = new DownloadFileUseCase(fileMetaDataRepository, fileStoragePort);
+        FileController fileController = new FileController(uploadFileUseCase, getAllFilesUseCase, downloadFileUseCase);
         mockMvc = MockMvcBuilders.standaloneSetup(fileController)
                 .setControllerAdvice(new GlobalExceptionHandler())
                 .build();

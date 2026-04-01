@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +54,35 @@ public class LocalFileStorageService implements FileStoragePort {
     @Override
     public String getStorageBasePath() {
         return absoluteStoragePath;
+    }
+
+    @Override
+    public InputStream load(String storagePath) {
+        try {
+            Path filePath = Paths.get(storagePath);
+            if (!Files.exists(filePath)) {
+                throw new RuntimeException("File not found at path: " + storagePath);
+            }
+            return Files.newInputStream(filePath);
+        } catch (IOException e) {
+            log.error("Failed to load file: {}", storagePath, e);
+            throw new RuntimeException("Failed to load file", e);
+        }
+    }
+
+    @Override
+    public List<String> listStoredFiles() {
+        try (Stream<Path> paths = Files.walk(Paths.get(absoluteStoragePath))) {
+            return paths
+                    .filter(Files::isRegularFile)
+                    .map(Path::toAbsolutePath)
+                    .map(Path::normalize)
+                    .map(Path::toString)
+                    .toList();
+        } catch (IOException e) {
+            log.error("Failed to list stored files in: {}", absoluteStoragePath, e);
+            throw new RuntimeException("Failed to list stored files", e);
+        }
     }
 }
 
