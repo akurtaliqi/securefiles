@@ -7,6 +7,9 @@ target/
 ### Secrets ###
 .env
 
+### H2 database files ###
+backend/data/
+
 ### STS ###
 .apt_generated
 .classpath
