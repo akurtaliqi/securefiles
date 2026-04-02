@@ -17,6 +17,6 @@ FROM sourcemation/jdk-21
 
 WORKDIR /app
 
-COPY --from=builder /build/target/securefiles-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /build/target/securefiles-1.0.0-SNAPSHOT.jar app.jar
 
 CMD ["java", "-jar", "app.jar"]
