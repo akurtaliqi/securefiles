@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -51,7 +52,7 @@ public class MinioFileStorageService implements FileStoragePort {
             minioClient.putObject(PutObjectArgs.builder()
                     .bucket(bucketName)
                     .object(objectKey)
-                    .stream(content, size, -1)
+                    .stream(content, size, (long) -1)
                     .contentType(contentType != null ? contentType : "application/octet-stream")
                     .userMetadata(Map.of(METADATA_ORIGINAL_FILENAME, originalFilename))
                     .build());
@@ -96,8 +97,10 @@ public class MinioFileStorageService implements FileStoragePort {
         try {
             StatObjectResponse stat = minioClient.statObject(
                     StatObjectArgs.builder().bucket(bucketName).object(objectKey).build());
-            String originalFilename = stat.userMetadata().getOrDefault(
-                    METADATA_ORIGINAL_FILENAME, extractFilenameFromKey(objectKey));
+            Set<String> metadataValues = stat.userMetadata().get(METADATA_ORIGINAL_FILENAME);
+            String originalFilename = (metadataValues == null || metadataValues.isEmpty())
+                    ? extractFilenameFromKey(objectKey)
+                    : metadataValues.iterator().next();
             return new StoredFileInfo(objectKey, originalFilename, stat.contentType(), stat.size());
         } catch (Exception e) {
             log.error("Failed to get metadata for object '{}'", objectKey, e);
