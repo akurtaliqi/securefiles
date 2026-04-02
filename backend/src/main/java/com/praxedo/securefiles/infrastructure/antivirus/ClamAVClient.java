@@ -1,6 +1,5 @@
 package com.praxedo.securefiles.infrastructure.antivirus;
 
-import com.praxedo.securefiles.application.port.AntivirusPort;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 @Component
-public class ClamAVClient implements AntivirusPort {
+public class ClamAVClient {
 
     private final String clamavHost;
     private final int clamavPort;

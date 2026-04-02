@@ -1,7 +1,6 @@
 package com.praxedo.securefiles.infrastructure.storage;
 
 import com.praxedo.securefiles.application.StoredFileInfo;
-import com.praxedo.securefiles.application.port.FileStoragePort;
 import io.minio.*;
 import io.minio.messages.Item;
 import jakarta.annotation.PostConstruct;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class MinioFileStorageService implements FileStoragePort {
+public class MinioFileStorageService {
 
     private static final String METADATA_ORIGINAL_FILENAME = "original-filename";
 
@@ -45,7 +44,6 @@ public class MinioFileStorageService implements FileStoragePort {
         }
     }
 
-    @Override
     public void store(String objectKey, InputStream content, long size, String originalFilename, String contentType) {
         try {
             minioClient.putObject(PutObjectArgs.builder()
@@ -62,7 +60,6 @@ public class MinioFileStorageService implements FileStoragePort {
         }
     }
 
-    @Override
     public InputStream load(String objectKey) {
         try {
             return minioClient.getObject(GetObjectArgs.builder()
@@ -75,7 +72,6 @@ public class MinioFileStorageService implements FileStoragePort {
         }
     }
 
-    @Override
     public List<String> listStoredFiles() {
         try {
             List<String> keys = new ArrayList<>();
@@ -91,7 +87,6 @@ public class MinioFileStorageService implements FileStoragePort {
         }
     }
 
-    @Override
     public StoredFileInfo getFileMetadata(String objectKey) {
         try {
             StatObjectResponse stat = minioClient.statObject(

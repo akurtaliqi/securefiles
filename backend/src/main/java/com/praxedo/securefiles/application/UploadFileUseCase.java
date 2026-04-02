@@ -1,10 +1,10 @@
 package com.praxedo.securefiles.application;
 
-import com.praxedo.securefiles.application.port.AntivirusPort;
-import com.praxedo.securefiles.application.port.FileStoragePort;
 import com.praxedo.securefiles.domain.FileMetaData;
 import com.praxedo.securefiles.domain.FileMetaDataRepository;
 import com.praxedo.securefiles.domain.FileStatus;
+import com.praxedo.securefiles.infrastructure.antivirus.ClamAVClient;
+import com.praxedo.securefiles.infrastructure.storage.MinioFileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,8 +18,8 @@ import java.util.UUID;
 public class UploadFileUseCase {
 
     private final FileMetaDataRepository fileMetaDataRepository;
-    private final FileStoragePort fileStoragePort;
-    private final AntivirusPort antivirusPort;
+    private final MinioFileStorageService fileStoragePort;
+    private final ClamAVClient antivirusPort;
 
     public FileMetaData execute(String originalFilename, MultipartFile file) {
         String objectKey = UUID.randomUUID() + "/" + originalFilename;

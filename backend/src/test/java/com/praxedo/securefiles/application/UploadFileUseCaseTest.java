@@ -1,10 +1,10 @@
 package com.praxedo.securefiles.application;
 
-import com.praxedo.securefiles.application.port.AntivirusPort;
-import com.praxedo.securefiles.application.port.FileStoragePort;
 import com.praxedo.securefiles.domain.FileMetaData;
 import com.praxedo.securefiles.domain.FileMetaDataRepository;
 import com.praxedo.securefiles.domain.FileStatus;
+import com.praxedo.securefiles.infrastructure.antivirus.ClamAVClient;
+import com.praxedo.securefiles.infrastructure.storage.MinioFileStorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,10 +30,10 @@ class UploadFileUseCaseTest {
     private FileMetaDataRepository fileMetaDataRepository;
 
     @Mock
-    private FileStoragePort fileStoragePort;
+    private MinioFileStorageService fileStoragePort;
 
     @Mock
-    private AntivirusPort antivirusPort;
+    private ClamAVClient antivirusPort;
 
     @Mock
     private MultipartFile multipartFile;

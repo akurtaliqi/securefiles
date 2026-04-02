@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { uploadFile } from '../services/fileService';
-import { DRAGGER } from '../constants';
+import { DRAGGER } from '../utils/constants';
 
 const { Dragger } = Upload;
 const REMOVE_DELAY_MS = 5000;

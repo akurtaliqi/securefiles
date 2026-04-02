@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Table, Button, message } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import { downloadFile, getFiles } from '../services/fileService';
-import { TABLE } from '../constants';
+import { TABLE } from '../utils/constants';
 
 const POLLING_INTERVAL_MS = 5000;
 

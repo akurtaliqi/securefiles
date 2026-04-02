@@ -3,10 +3,11 @@ package com.praxedo.securefiles.controller;
 import com.praxedo.securefiles.application.DownloadFileUseCase;
 import com.praxedo.securefiles.application.GetAllFilesUseCase;
 import com.praxedo.securefiles.application.UploadFileUseCase;
-import com.praxedo.securefiles.application.port.AntivirusPort;
-import com.praxedo.securefiles.application.port.FileStoragePort;
 import com.praxedo.securefiles.domain.FileMetaDataRepository;
 import com.praxedo.securefiles.exception.GlobalExceptionHandler;
+import com.praxedo.securefiles.infrastructure.antivirus.ClamAVClient;
+import com.praxedo.securefiles.infrastructure.persistence.FileMetaDataJpaRepository;
+import com.praxedo.securefiles.infrastructure.storage.MinioFileStorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,13 +28,13 @@ class FileControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private AntivirusPort antivirusPort;
+    private ClamAVClient antivirusPort;
 
     @Mock
-    private FileStoragePort fileStoragePort;
+    private MinioFileStorageService fileStoragePort;
 
     @Mock
-    private FileMetaDataRepository fileMetaDataRepository;
+    private FileMetaDataJpaRepository fileMetaDataRepository;
 
     @BeforeEach
     void setUp() {
@@ -46,7 +47,6 @@ class FileControllerTest {
                 .build();
 
         lenient().when(antivirusPort.scan(any())).thenReturn(true);
-        lenient().when(fileMetaDataRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
     }
 
     @Test

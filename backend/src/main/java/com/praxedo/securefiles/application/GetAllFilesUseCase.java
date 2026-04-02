@@ -1,9 +1,9 @@
 package com.praxedo.securefiles.application;
 
-import com.praxedo.securefiles.application.port.FileStoragePort;
 import com.praxedo.securefiles.domain.FileMetaData;
 import com.praxedo.securefiles.domain.FileMetaDataRepository;
 import com.praxedo.securefiles.domain.FileStatus;
+import com.praxedo.securefiles.infrastructure.storage.MinioFileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class GetAllFilesUseCase {
 
     private final FileMetaDataRepository fileMetaDataRepository;
-    private final FileStoragePort fileStoragePort;
+    private final MinioFileStorageService fileStoragePort;
 
     public List<FileMetaData> execute() {
         List<String> objectKeys = fileStoragePort.listStoredFiles();
