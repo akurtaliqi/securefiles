@@ -1,6 +1,6 @@
 # SecureFiles
 
-A secure file management application built with Spring Boot (backend) and React (frontend) using hexagonal architecture.
+A secure file management application built with Spring Boot (backend) and React (frontend) using (simplified) hexagonal architecture.
 
 Find all the sources for IA prompts in `BUISNESS_SPEC.md`, `AGENTS.md` and `PROMPTS.md`
 Find the approach used for the project in `DETAILED_APPROACH.md`
