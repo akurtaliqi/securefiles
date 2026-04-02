@@ -41,10 +41,8 @@ build/
 ### Frontend ###
 node_modules/
 dist/
-build/
 
 ### Environment Variables ###
-.env
 backend/.env
 
 postman
