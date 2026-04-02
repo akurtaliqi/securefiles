@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Service
 @Slf4j
@@ -97,10 +96,10 @@ public class MinioFileStorageService implements FileStoragePort {
         try {
             StatObjectResponse stat = minioClient.statObject(
                     StatObjectArgs.builder().bucket(bucketName).object(objectKey).build());
-            Set<String> metadataValues = stat.userMetadata().get(METADATA_ORIGINAL_FILENAME);
-            String originalFilename = (metadataValues == null || metadataValues.isEmpty())
-                    ? extractFilenameFromKey(objectKey)
-                    : metadataValues.iterator().next();
+            String metadataValue = stat.userMetadata().get(METADATA_ORIGINAL_FILENAME).toString();
+            String originalFilename = (metadataValue != null && !metadataValue.isEmpty())
+                    ? metadataValue
+                    : extractFilenameFromKey(objectKey);
             return new StoredFileInfo(objectKey, originalFilename, stat.contentType(), stat.size());
         } catch (Exception e) {
             log.error("Failed to get metadata for object '{}'", objectKey, e);
