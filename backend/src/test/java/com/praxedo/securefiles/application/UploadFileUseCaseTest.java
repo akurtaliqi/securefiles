@@ -61,8 +61,7 @@ class UploadFileUseCaseTest {
         lenient().when(multipartFile.getContentType()).thenReturn(contentType);
         lenient().when(multipartFile.getSize()).thenReturn(fileSize);
         lenient().when(multipartFile.getInputStream()).thenReturn(inputStream);
-        when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
-        
+
         when(antivirusPort.scan(any(InputStream.class))).thenReturn(true);
 
         FileMetaData savedMetaData = new FileMetaData();
@@ -84,7 +83,7 @@ class UploadFileUseCaseTest {
 
         verify(antivirusPort, times(1)).scan(any(InputStream.class));
         verify(fileMetaDataRepository, times(1)).save(any(FileMetaData.class));
-        verify(fileStoragePort, times(1)).store(anyString(), any(InputStream.class), eq(fileSize));
+        verify(fileStoragePort, times(1)).store(anyString(), any(InputStream.class), eq(fileSize), anyString(), anyString());
     }
 
     @Test
@@ -96,8 +95,7 @@ class UploadFileUseCaseTest {
         lenient().when(multipartFile.getContentType()).thenReturn("text/plain");
         lenient().when(multipartFile.getSize()).thenReturn(4L);
         lenient().when(multipartFile.getInputStream()).thenReturn(inputStream);
-        when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
-        
+
         when(antivirusPort.scan(any(InputStream.class))).thenReturn(true);
 
         FileMetaData savedMetaData = new FileMetaData();
@@ -111,7 +109,7 @@ class UploadFileUseCaseTest {
         InOrder inOrder = inOrder(antivirusPort, fileMetaDataRepository, fileStoragePort);
         inOrder.verify(antivirusPort).scan(any(InputStream.class));
         inOrder.verify(fileMetaDataRepository).save(any(FileMetaData.class));
-        inOrder.verify(fileStoragePort).store(anyString(), any(InputStream.class), eq(4L));
+        inOrder.verify(fileStoragePort).store(anyString(), any(InputStream.class), eq(4L), anyString(), anyString());
     }
 
     @Test
@@ -123,8 +121,7 @@ class UploadFileUseCaseTest {
         lenient().when(multipartFile.getContentType()).thenReturn("application/pdf");
         lenient().when(multipartFile.getSize()).thenReturn(100L);
         lenient().when(multipartFile.getInputStream()).thenReturn(inputStream);
-        when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
-        
+
         when(antivirusPort.scan(any(InputStream.class))).thenReturn(true);
 
         FileMetaData savedMetaData = new FileMetaData();
@@ -148,7 +145,6 @@ class UploadFileUseCaseTest {
         when(file1.getContentType()).thenReturn("text/plain");
         when(file1.getSize()).thenReturn(4L);
         when(file1.getInputStream()).thenReturn(inputStream1);
-        when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
 
         when(antivirusPort.scan(any(InputStream.class))).thenReturn(true);
 
@@ -168,7 +164,7 @@ class UploadFileUseCaseTest {
         uploadFileUseCase.execute(filename, file1);
         uploadFileUseCase.execute(filename, file2);
 
-        verify(fileStoragePort, times(2)).store(anyString(), any(InputStream.class), eq(4L));
+        verify(fileStoragePort, times(2)).store(anyString(), any(InputStream.class), eq(4L), anyString(), anyString());
     }
 
     @Test
@@ -179,7 +175,6 @@ class UploadFileUseCaseTest {
         lenient().when(multipartFile.getContentType()).thenReturn("text/plain");
         lenient().when(multipartFile.getSize()).thenReturn(4L);
         when(multipartFile.getInputStream()).thenThrow(new java.io.IOException("Stream error"));
-        when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
 
         assertThrows(RuntimeException.class, () -> uploadFileUseCase.execute(filename, multipartFile));
     }
@@ -193,14 +188,13 @@ class UploadFileUseCaseTest {
         lenient().when(multipartFile.getContentType()).thenReturn("application/octet-stream");
         lenient().when(multipartFile.getSize()).thenReturn(16L);
         when(multipartFile.getInputStream()).thenReturn(inputStream);
-        when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
 
         when(antivirusPort.scan(any(InputStream.class))).thenReturn(false);
 
         assertThrows(RuntimeException.class, () -> uploadFileUseCase.execute(filename, multipartFile));
 
         verify(fileMetaDataRepository, never()).save(any(FileMetaData.class));
-        verify(fileStoragePort, never()).store(anyString(), any(InputStream.class), anyLong());
+        verify(fileStoragePort, never()).store(anyString(), any(InputStream.class), anyLong(), anyString(), anyString());
     }
 
     @Test
@@ -212,7 +206,6 @@ class UploadFileUseCaseTest {
         lenient().when(multipartFile.getContentType()).thenReturn("text/plain");
         lenient().when(multipartFile.getSize()).thenReturn(12L);
         lenient().when(multipartFile.getInputStream()).thenReturn(inputStream);
-        when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
 
         when(antivirusPort.scan(any(InputStream.class))).thenReturn(true);
 
@@ -229,7 +222,7 @@ class UploadFileUseCaseTest {
         assertEquals(FileStatus.UPLOADED, result.getStatus());
 
         verify(fileMetaDataRepository, times(1)).save(any(FileMetaData.class));
-        verify(fileStoragePort, times(1)).store(anyString(), any(InputStream.class), eq(12L));
+        verify(fileStoragePort, times(1)).store(anyString(), any(InputStream.class), eq(12L), anyString(), anyString());
     }
 }
 

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -23,17 +22,13 @@ public class UploadFileUseCase {
     private final AntivirusPort antivirusPort;
 
     public FileMetaData execute(String originalFilename, MultipartFile file) {
-        String fileUuid = UUID.randomUUID().toString();
-        String storagePath = Paths.get(fileStoragePort.getStorageBasePath(), fileUuid, originalFilename)
-                .toAbsolutePath()
-                .normalize()
-                .toString();
+        String objectKey = UUID.randomUUID() + "/" + originalFilename;
 
         scanFile(file);
 
         FileMetaData fileMetaData = new FileMetaData();
         fileMetaData.setOriginalFilename(originalFilename);
-        fileMetaData.setStoragePath(storagePath);
+        fileMetaData.setStoragePath(objectKey);
         fileMetaData.setStatus(FileStatus.CLEAN);
         fileMetaData.setFileSize(file.getSize());
         fileMetaData.setContentType(file.getContentType());
@@ -42,7 +37,7 @@ public class UploadFileUseCase {
         FileMetaData savedFile = fileMetaDataRepository.save(fileMetaData);
 
         try {
-            fileStoragePort.store(storagePath, file.getInputStream(), file.getSize());
+            fileStoragePort.store(objectKey, file.getInputStream(), file.getSize(), originalFilename, file.getContentType());
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file", e);
         }
@@ -61,6 +56,3 @@ public class UploadFileUseCase {
         }
     }
 }
-
-
-

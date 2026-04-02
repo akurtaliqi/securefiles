@@ -46,7 +46,6 @@ class FileControllerTest {
                 .build();
 
         lenient().when(antivirusPort.scan(any())).thenReturn(true);
-        lenient().when(fileStoragePort.getStorageBasePath()).thenReturn("/uploads");
         lenient().when(fileMetaDataRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
     }
 
@@ -62,7 +61,7 @@ class FileControllerTest {
         mockMvc.perform(multipart("/api/files").file(file))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.originalFilename").value("test.txt"))
-                .andExpect(jsonPath("$.status").value("UPLOADED"))
+                .andExpect(jsonPath("$.status").value("CLEAN"))
                 .andExpect(jsonPath("$.fileSize").value(12L))
                 .andExpect(jsonPath("$.contentType").value("text/plain"));
     }
