@@ -45,7 +45,7 @@ docker-compose up --build
 
 ## Development
 - Backend: Spring Boot with JPA
-- Frontend: React with Vite
+- Frontend: React with Vite and Ant Design for UI components
 - Database: H2 for development, PostgreSQL for production
 - Storage : MinIO for file storage
 - Authentication: No authentication implemented yet, but can be added using Spring Security and JWT. Maybe if I'm motivated next Saturday at 6 am :).
