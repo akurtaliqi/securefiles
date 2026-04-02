@@ -22,7 +22,7 @@ This project follows hexagonal architecture principles:
 - Docker and Docker Compose
 
 Replace the data in the `.env.example` file with your own values for database credentials.
-Rename the file to `.env` and place. It should stay in the root directory of the project.
+Rename the file to `.env`. It should stay in the root directory of the project.
 
 ### Running with Docker
 ```bash
