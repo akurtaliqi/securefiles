@@ -241,11 +241,15 @@ AI-generated code must:
 
 # Frontend Development Guidelines
 * Keep files around 150 lines of code to improve readability and scalability
-* Use the COmpount Component pattern for better separation of concerns and maintainability
+* Use the Compound Component pattern for better separation of concerns and maintainability
 * Rename components to reflect their purpose and avoid confusion (e.g., `FileUpload` instead of `FileUploadComponent`)
 * Use clear and descriptive names for components, props, and functions to enhance readability
 * Avoid unnecessary abstraction and complexity; prefer straightforward implementations that are easy to understand and maintain
 * Do not implement features that are not explicitly required (e.g., authentication, state management libraries, complex UI patterns) to keep the codebase simple and focused on the core functionality
 * Ensure that all code is actively used in the application; do not create components, functions, or files that are not immediately necessary for the current requirements
 * Use Redux or Context API only if state management becomes complex; otherwise, manage state locally within components to keep things simple
-* 
+* Use https://standardjs.com/ for consistent code style and formatting across the frontend codebase
+* Write unit tests for components and functions to ensure reliability and facilitate future changes
+* Use React Testing Library for testing components and Jest for testing functions and utilities
+* Ensure that all code is in English, including comments and identifiers, to maintain consistency and accessibility
+* Use constants for all string literals and configuration values to improve maintainability and reduce the risk of typos

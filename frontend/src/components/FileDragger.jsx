@@ -1,13 +1,25 @@
+import { useState } from 'react'
 import { Upload, message } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import { uploadFile } from '../services/fileService'
+import { DRAGGER } from '../constants'
 
 const { Dragger } = Upload
+const REMOVE_DELAY_MS = 5000
 
-function FileDragger() {
+function FileDragger ({ onUploadSuccess }) {
+  const [fileList, setFileList] = useState([])
+
+  const removeFileAfterDelay = (fileUid) => {
+    setTimeout(() => {
+      setFileList((current) => current.filter((f) => f.uid !== fileUid))
+    }, REMOVE_DELAY_MS)
+  }
+
   const uploadProps = {
     name: 'file',
     multiple: true,
+    fileList,
     customRequest: async ({ file, onSuccess, onError }) => {
       try {
         const result = await uploadFile(file)
@@ -16,14 +28,18 @@ function FileDragger() {
         onError(error)
       }
     },
-    onChange(info) {
+    onChange (info) {
+      setFileList(info.fileList)
       const { status } = info.file
       if (status === 'done') {
         message.success(`${info.file.name} uploaded successfully`)
+        onUploadSuccess?.()
+        removeFileAfterDelay(info.file.uid)
       } else if (status === 'error') {
         message.error(info.file.error?.message ?? `${info.file.name} upload failed`)
+        removeFileAfterDelay(info.file.uid)
       }
-    },
+    }
   }
 
   return (
@@ -31,13 +47,10 @@ function FileDragger() {
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p className="ant-upload-text">Click or drag a file to this area to upload</p>
-      <p className="ant-upload-hint">
-        Any file type supported. Files are scanned for viruses before becoming available for download.
-      </p>
+      <p className="ant-upload-text">{DRAGGER.TEXT}</p>
+      <p className="ant-upload-hint">{DRAGGER.HINT}</p>
     </Dragger>
   )
 }
 
 export default FileDragger
-

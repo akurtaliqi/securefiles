@@ -1,7 +1,41 @@
+/* ── Layout ────────────────────────────────────────────────── */
+.layout {
+  min-height: 100vh;
+}
+
+.layout__header {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-inline: 24px;
+}
+
+.layout__logo {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.layout__menu {
+  flex: 1;
+}
+
+.layout__content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 24px;
+}
+
 /* ── Page ─────────────────────────────────────────────────── */
+.page__section {
+  margin-top: 32px;
+}
+
 .page {
   width: 100%;
-  max-width: 640px;
+  max-width: 960px;
 }
 
 .page__header {
