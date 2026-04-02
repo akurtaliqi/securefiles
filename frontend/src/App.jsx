@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { Layout } from 'antd'
-import FileDragger from './components/FileDragger'
-import FileTable from './components/FileTable'
-import Page from './components/Page'
-import { PAGE } from './constants'
-import './App.css'
+import { useState } from 'react';
+import { Layout } from 'antd';
+import FileDragger from './components/FileDragger';
+import FileTable from './components/FileTable';
+import Page from './components/Page';
+import { PAGE } from './constants';
+import './App.css';
 
-const { Content } = Layout
+const { Content } = Layout;
 
 function App () {
-  const [uploadCount, setUploadCount] = useState(0)
+  const [uploadCount, setUploadCount] = useState(0);
 
-  const handleUploadSuccess = () => setUploadCount((count) => count + 1)
+  const handleUploadSuccess = () => setUploadCount((count) => count + 1);
 
   return (
     <Layout className="layout">
@@ -29,7 +29,7 @@ function App () {
         </Page>
       </Content>
     </Layout>
-  )
+  );
 }
 
-export default App
+export default App;

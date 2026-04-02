@@ -1,10 +1,10 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 
 global.ResizeObserver = class ResizeObserver {
   observe () {}
   unobserve () {}
   disconnect () {}
-}
+};
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -18,7 +18,7 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: () => {},
     dispatchEvent: () => false
   })
-})
+});
 
 window.getComputedStyle = () => ({
   getPropertyValue: () => '',
@@ -27,7 +27,6 @@ window.getComputedStyle = () => ({
   overflowY: '',
   width: '0',
   height: '0'
-})
+});
 
-HTMLAnchorElement.prototype.click = () => {}
-
+HTMLAnchorElement.prototype.click = () => {};

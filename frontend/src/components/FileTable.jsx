@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import { Table, Button, message } from 'antd'
-import { DownloadOutlined } from '@ant-design/icons'
-import { downloadFile, getFiles } from '../services/fileService'
-import { TABLE } from '../constants'
+import { useEffect, useRef, useState } from 'react';
+import { Table, Button, message } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
+import { downloadFile, getFiles } from '../services/fileService';
+import { TABLE } from '../constants';
 
-const POLLING_INTERVAL_MS = 5000
+const POLLING_INTERVAL_MS = 5000;
 
 const formatFileSize = (bytes) => {
-  if (bytes >= 1024 * 1024) return TABLE.SIZE_MB((bytes / (1024 * 1024)).toFixed(2))
-  return TABLE.SIZE_KB((bytes / 1024).toFixed(2))
-}
+  if (bytes >= 1024 * 1024) return TABLE.SIZE_MB((bytes / (1024 * 1024)).toFixed(2));
+  return TABLE.SIZE_KB((bytes / 1024).toFixed(2));
+};
 
 const STATIC_COLUMNS = [
   {
@@ -23,27 +23,40 @@ const STATIC_COLUMNS = [
     key: 'fileSize',
     render: (size) => formatFileSize(size),
   },
-]
+];
 
-function FileTable({ refreshTrigger }) {
-  const [files, setFiles] = useState([])
-  const [loading, setLoading] = useState(false)
+function FileTable ({ refreshTrigger }) {
+  const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const isFirstRender = useRef(true);
 
-  useEffect(() => {
-    setLoading(true)
+  const loadFiles = () => {
+    setLoading(true);
     getFiles()
       .then(setFiles)
       .catch((err) => message.error(err.message))
-      .finally(() => setLoading(false))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    loadFiles();
 
     const intervalId = setInterval(() => {
       getFiles()
         .then(setFiles)
-        .catch(() => {})
-    }, POLLING_INTERVAL_MS)
+        .catch(() => {});
+    }, POLLING_INTERVAL_MS);
 
-    return () => clearInterval(intervalId)
-  }, [refreshTrigger])
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    loadFiles();
+  }, [refreshTrigger]);
 
   const columns = [
     ...STATIC_COLUMNS,
@@ -56,15 +69,15 @@ function FileTable({ refreshTrigger }) {
           icon={<DownloadOutlined />}
           onClick={async () => {
             try {
-              await downloadFile(record.id)
+              await downloadFile(record.id);
             } catch (err) {
-              message.error(err.message)
+              message.error(err.message);
             }
           }}
         />
       ),
     },
-  ]
+  ];
 
   return (
     <Table
@@ -78,7 +91,7 @@ function FileTable({ refreshTrigger }) {
         pageSizeOptions: [5, 10, 25, 50],
       }}
     />
-  )
+  );
 }
 
-export default FileTable
+export default FileTable;
