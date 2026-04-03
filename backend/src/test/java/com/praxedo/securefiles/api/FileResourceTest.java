@@ -1,6 +1,5 @@
-package com.praxedo.securefiles.controller;
+package com.praxedo.securefiles.api;
 
-import com.praxedo.securefiles.api.FileResource;
 import com.praxedo.securefiles.application.DownloadFileUseCase;
 import com.praxedo.securefiles.application.GetAllFilesUseCase;
 import com.praxedo.securefiles.application.UploadFileUseCase;
