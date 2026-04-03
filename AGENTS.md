@@ -14,9 +14,9 @@ See [BUSINESS_SPEC.md](BUSINESS_SPEC.md) for detailed business specifications an
   - **Entities**: `FileMetadata`, `FileStatus`
   - **Enums**: `FileStatus` (file lifecycle states)
 - **Application Layer**: Use cases and application services in `application/` package (business orchestration)
-- **Controller Layer**: HTTP layer only in `controller/` package
+- **API Layer**: HTTP layer only in `api/` package
 - **Infrastructure Layer**: External systems in `infrastructure/` package (DB, storage, antivirus)
-- **Package Structure**: `com.praxedo.securefiles.{application,controller,domain,infrastructure}`
+- **Package Structure**: `com.praxedo.securefiles.{application,api,domain,infrastructure}`
 
 ## Project Structure
 - `secure-file-service/` (project root)
@@ -38,13 +38,11 @@ See [BUSINESS_SPEC.md](BUSINESS_SPEC.md) for detailed business specifications an
 
 ## Coding Conventions
 - **Lombok Usage**: Prefer `@Data`, `@AllArgsConstructor`, `@NoArgsConstructor` for entities; `@RequiredArgsConstructor` for services
-- **DTO Usage**: Create separate DTO classes in `controller/dto/` package for request/response mapping; 
 - **Lombok** `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor` for clean implementation; 
-- **MapStruct** for entity-to-DTO conversion
-- **Package Naming**: Follow `com.praxedo.securefiles.{domain,application,controller,infrastructure}`
+- **Package Naming**: Follow `com.praxedo.securefiles.{domain,application,api,infrastructure}`
 - **Configuration**: Minimal properties in `application.properties`; use profiles for environments
 - **Entity Example**: Use `@Entity @Table(name="files")` with `@Id @GeneratedValue(strategy=GenerationType.IDENTITY)`
-- **Controller Example**: `@RestController @RequestMapping("/api/files")` with standard CRUD mappings
+- **Api Example**: `@RestController @RequestMapping("/api/files")` with standard CRUD mappings
 - **Unused Code**: Never add unused code; ensure all code is actively used or remove it
 - **Language** : All code must be in English; no comments or identifiers in other languages
 
@@ -83,13 +81,13 @@ Focus on:
 
 ## 🧱 Architecture Principles
 * Follow a **layered / hexagonal-inspired architecture**:
-  * `controller` → HTTP layer only
+  * `api` → HTTP layer only
   * `application` → use cases (business orchestration)
   * `domain` → core models (no framework dependency)
   * `infrastructure` → external systems (DB, storage, antivirus)
 
 * Strict separation of concerns:
-  * No business logic in controllers
+  * No business logic in api
   * No framework logic in domain
   * Infrastructure must be replaceable
 
