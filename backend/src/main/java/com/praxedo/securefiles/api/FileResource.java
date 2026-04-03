@@ -1,4 +1,4 @@
-package com.praxedo.securefiles.controller;
+package com.praxedo.securefiles.api;
 
 import com.praxedo.securefiles.application.DownloadFileUseCase;
 import com.praxedo.securefiles.application.DownloadResult;
@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/files")
 @RequiredArgsConstructor
-public class FileController {
+public class FileResource {
 
     private final UploadFileUseCase uploadFileUseCase;
     private final GetAllFilesUseCase getAllFilesUseCase;

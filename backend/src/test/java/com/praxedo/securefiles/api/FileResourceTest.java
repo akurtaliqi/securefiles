@@ -1,5 +1,6 @@
 package com.praxedo.securefiles.controller;
 
+import com.praxedo.securefiles.api.FileResource;
 import com.praxedo.securefiles.application.DownloadFileUseCase;
 import com.praxedo.securefiles.application.GetAllFilesUseCase;
 import com.praxedo.securefiles.application.UploadFileUseCase;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
-class FileControllerTest {
+class FileResourceTest {
 
     private MockMvc mockMvc;
 
@@ -40,8 +41,8 @@ class FileControllerTest {
         UploadFileUseCase uploadFileUseCase = new UploadFileUseCase(fileMetaDataRepository, fileStoragePort, antivirusPort);
         GetAllFilesUseCase getAllFilesUseCase = new GetAllFilesUseCase(fileMetaDataRepository, fileStoragePort);
         DownloadFileUseCase downloadFileUseCase = new DownloadFileUseCase(fileMetaDataRepository, fileStoragePort);
-        FileController fileController = new FileController(uploadFileUseCase, getAllFilesUseCase, downloadFileUseCase);
-        mockMvc = MockMvcBuilders.standaloneSetup(fileController)
+        FileResource fileResource = new FileResource(uploadFileUseCase, getAllFilesUseCase, downloadFileUseCase);
+        mockMvc = MockMvcBuilders.standaloneSetup(fileResource)
                 .setControllerAdvice(new GlobalExceptionHandler())
                 .build();
 
