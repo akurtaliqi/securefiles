@@ -19,6 +19,11 @@
 - **Hexagonal avancée** : Évoluer vers une architecture hexagonale plus complète avec des ports et adaptateurs clairement définis pour faciliter les tests et la maintenance, si le projet devient plus complexe.
 - **Microservices** : Si le projet grandit significativement, envisager une architecture microservices pour séparer les différentes responsabilités (upload, antivirus, gestion des utilisateurs).
 
+### 5. Documentation
+- **Documentation API** : Ajouter une documentation API (Swagger/OpenAPI) pour faciliter l'intégration avec le frontend et les clients externes.
+- **Documentation technique** : Maintenir une documentation technique à jour pour faciliter la maintenance et l'onboarding de nouveaux développeurs.
+
+
 ## Frontend
 ### 1. Expérience utilisateur
 - **Feedback visuel** : Ajouter des indicateurs de progression pour les uploads et les scans antivirus.
