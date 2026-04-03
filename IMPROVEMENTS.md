@@ -5,7 +5,7 @@
 - **Validation des fichiers** : Ajouter des contrôles supplémentaires sur les fichiers uploadés (type MIME, analyse approfondie avec ClamAV).
 - **Vault de secrets** : Utiliser un vault de secrets (HashiCorp Vault, AWS Secrets Manager) pour gérer les informations sensibles (credentials de la base de données, clés d'API)."
 - **Gestion des permissions & comptes utilisateurs** : Implémenter un système de rôles et permissions pour contrôler l'accès à l'application et aux différents fichiers.
-- 
+
 ### 2. Performance
 - **Clustering** : Si la charge dépasse les 20–50 utilisateurs concurrents, envisager une architecture de clustering pour le backend.
 - **Cache** : Implémenter un système de cache pour les métadonnées des fichiers afin d'améliorer les performances des requêtes de liste
@@ -28,7 +28,7 @@
 ### 2. Fonctionnalités supplémentaires
 - **Recherche et filtrage** : Ajouter des fonctionnalités de recherche et de filtrage pour faciliter la navigation dans les fichiers uploadés.
 
-## 3. Store
+### 3. Store
 - **Intégration avec un store** : Utiliser un store (Redux, Zustand) pour gérer l'état de l'application de manière plus efficace, surtout si le frontend devient plus complexe.
 - **Optimisation des performances** : Implémenter des techniques d'optimisation des performances (lazy loading, memoization) pour améliorer la réactivité de l'interface. De même, si l'interface devient plus complexe.
 
