@@ -3,6 +3,7 @@
 ### 1. Sécurité
 - **Authentification** : Implémenter une solution d'authentification (JWT, OAuth2) pour sécuriser les endpoints.
 - **Validation des fichiers** : Ajouter des contrôles supplémentaires sur les fichiers uploadés (type MIME, analyse approfondie avec ClamAV).
+- **Vault de secrets** : Utiliser un vault de secrets (HashiCorp Vault, AWS Secrets Manager) pour gérer les informations sensibles (credentials de la base de données, clés d'API)."
 
 ### 2. Performance
 - **Clustering** : Si la charge dépasse les 20–50 utilisateurs concurrents, envisager une architecture de clustering pour le backend.
@@ -14,7 +15,7 @@
 
 ### 4. Architecture
 - **Simplification de l'architecture** : Si le projet reste simple, envisager de simplifier l'architecture pour réduire la complexité et faciliter le développement.
-- **Hexagonal avancée** : Évoluer vers une architecture hexagonale plus complète avec des ports et adaptateurs clairement définis pour faciliter les tests et la maintenance.
+- **Hexagonal avancée** : Évoluer vers une architecture hexagonale plus complète avec des ports et adaptateurs clairement définis pour faciliter les tests et la maintenance, si le projet devient plus complexe.
 - **Microservices** : Si le projet grandit significativement, envisager une architecture microservices pour séparer les différentes responsabilités (upload, antivirus, gestion des utilisateurs).
 
 ## Frontend
