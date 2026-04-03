@@ -33,5 +33,5 @@
 - **Optimisation des performances** : Implémenter des techniques d'optimisation des performances (lazy loading, memoization) pour améliorer la réactivité de l'interface. De même, si l'interface devient plus complexe.
 
 
-## CI 
+## CI / CD
 - **Intégration continue** : Mettre en place une pipeline d'intégration continue (GitHub Actions, Jenkins) pour automatiser les tests et les déploiements.
