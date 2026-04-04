@@ -23,7 +23,6 @@
 - **Documentation API** : Ajouter une documentation API (Swagger/OpenAPI) pour faciliter l'intégration avec le frontend et les clients externes.
 - **Documentation technique** : Maintenir une documentation technique à jour pour faciliter la maintenance et l'onboarding de nouveaux développeurs.
 
-
 ## Frontend
 ### 1. Expérience utilisateur
 - **Feedback visuel** : Ajouter des indicateurs de progression pour les uploads et les scans antivirus.
@@ -40,3 +39,7 @@
 
 ## CI / CD
 - **Intégration continue** : Mettre en place une pipeline d'intégration continue (GitHub Actions, Jenkins) pour automatiser les tests et les déploiements.
+
+## Tests
+- **Tests unitaires** : Continuer l'implémentation des TU 
+- **Tests fonctionnels** : Faire des tests fonctionnels très poussés pour s'assurer que tous les cas d'usage sont couverts, notamment les cas d'erreur (fichier infecté, échec du scan, etc.). Car des tests basiques ont été faits, mais il est important de couvrir tous les cas d'usage pour garantir la robustesse de l'application.
